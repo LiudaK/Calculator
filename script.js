@@ -1,16 +1,27 @@
 let a = null;
 let b = null;
 let operation = '';
+let skipPrevRead = false;
 
 function read() {
   return document.getElementById('result').value || '0';
+
 }
 
 function write(value) {
   document.getElementById('result').value = value;
 }
 
+function addToList( nText ) {
+  var element = document.getElementById("calcStatusText");
+  element.innerHTML += nText;
+}
+
 function toInput(value) {
+  if (skipPrevRead) {
+      write("");
+      skipPrevRead = false;
+  }
   if (value === '.' && !read().includes('.')) {
     write(read() + value);
   } else if (value === '0' && read().includes('.')) {
@@ -26,49 +37,55 @@ function toInput(value) {
       }
     }
   }
+  addToList(value);
 }
 
 function subtract(){
+  addToList("-");
   if(!operation) {
     a = Number(read());
     operation = '-';
-    write('0');
+    skipPrevRead = true;
   } else {
     getResult();
   }
 }
 
 function addNum() {
+  addToList("+");
   if(!operation) {
     a = Number(read());
     operation = '+';
-    write('0');
+    skipPrevRead = true;
   } else {
     getResult();
   }
 }
 
 function multiply() {
+  addToList("*");
   if(!operation) {
     a = Number(read());
     operation = '*';
-    write('0');
+    skipPrevRead = true;
   } else {
     getResult();
   }
 }
 
 function divide() {
+  addToList("/");
   if(!operation) {
     a = Number(read());
     operation = '/';
-    write('0');
+    skipPrevRead = true;
   } else {
     getResult();
   }
 }
 
 function getResult() {
+  addToList("=");
   b = Number(read());
   if (operation) {
     switch (operation) {
@@ -94,10 +111,16 @@ function getResult() {
         break;
     }
   }
+  addToList(read() + '; ');
+  operation = '';
+  skipPrevRead = true;
 }
 
 function clearValue() {
+ // console.log('clear value');
   write('0');
   a = b = null;
   operation = '';
+  var element = document.getElementById("calcStatusText");
+  element.innerHTML = "";
 }

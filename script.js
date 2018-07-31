@@ -13,7 +13,7 @@ function write(value) {
 }
 
 function addToList( nText ) {
-  var element = document.getElementById("calcStatusText");
+  let element = document.getElementById("calcStatusText");
   element.innerHTML += nText;
 }
 
@@ -121,6 +121,6 @@ function clearValue() {
   write('0');
   a = b = null;
   operation = '';
-  var element = document.getElementById("calcStatusText");
+  let element = document.getElementById("calcStatusText");
   element.innerHTML = "";
 }

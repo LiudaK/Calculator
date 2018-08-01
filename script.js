@@ -5,7 +5,6 @@ let skipPrevRead = false;
 
 function read() {
   return document.getElementById('result').value || '0';
-
 }
 
 function write(value) {

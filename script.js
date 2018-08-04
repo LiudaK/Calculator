@@ -123,3 +123,10 @@ function clearValue() {
   let element = document.getElementById("calcStatusText");
   element.innerHTML = "";
 }
+function sum(a,b) {
+  return a+b;
+};
+
+module.exports = {
+  sum
+};

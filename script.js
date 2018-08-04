@@ -1,6 +1,6 @@
 let a = null;
 let b = null;
-let operation = '';
+let operation = '';npm install --save-dev jest
 let skipPrevRead = false;
 
 function read() {
